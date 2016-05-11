@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jacket.webapp.user.entity.User" >
-
+    <select id="selectUserRoles" parameterType="java.lang.String" resultType="java.lang.String">
+        select r.code from t_user_role ur
+        join t_role r on ur.role_id=r.id
+        where  ur.user_id=#{userId}
+    </select>
+    <select id="selectUserPermissions" parameterType="java.lang.String" resultType="java.lang.String">
+        select p.code from t_permission p
+        join t_role_permission rp on p.id=rp.per_id
+        join t_role ur on rp.role_id=ur.id
+        JOIN t_user_per up ON up.user_id=ur.user_id
+        where ur.user_id=#{userId}
+    </select>
 
 
 </mapper>

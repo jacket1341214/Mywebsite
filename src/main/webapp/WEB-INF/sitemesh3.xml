@@ -9,14 +9,15 @@
 
     <!-- 排除，不进行装饰的路径 -->
     <mapping path="/static/*" exclue="true"/>
-    <!--<mapping path="/user/*" exclue="true"/>-->
+    <mapping path="/user/login" exclue="true"/>
+    <mapping path="/user/register" exclue="true"/>
+    <mapping path="/user/test" exclue="true"/>
     <mapping path="/*"/>
     <!--<mapping path="/sys/user/toFindPasswordPage"/>-->
     <!--<mapping path="/loadShareItem"/>-->
 
     <!-- 默认装饰器，当下面的路径都不匹配时，启用该装饰器进行装饰 -->
-    <mapping decorator="/WEB-INF/views/common/decorate-default.jsp"/>
-    <!-- 订单下达装饰器，当下面的路径都不匹配时，启用该装饰器进行装饰 -->
-    <!--<mapping path="/order/order-entering*" decorator="/WEB-INF/commons/layouts/order-entering-decorator.jsp"/>-->
+    <mapping decorator="/WEB-INF/views/common/decorate-metronic.jsp"/>
+    <!--<mapping decorator="/WEB-INF/views/common/decorate-default.jsp"/>-->
 
 </sitemesh>

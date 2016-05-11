@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jacket.webapp.teacher.repository.PaperDetailRepository" >
+    <select id="listSingleQuestion" resultType="com.jacket.webapp.teacher.entity.SingleQuestion">
+      SELECT s.id,s.content,s.difficulty,s.A,s.B,s.C,s.D,s.score,s.answer,s.explains FROM t_paper_detail p
+    INNER JOIN t_single_question s on p.question_id=s.id WHERE p.paper_id=#{paperId} and p.type='1';
+    </select>
+    <select id="listTfQuestion" resultType="com.jacket.webapp.teacher.entity.TfQuestion">
+        SELECT s.id,s.content,s.difficulty,s.score,s.answer,s.explains FROM t_paper_detail p
+        INNER JOIN t_tf_question s on p.question_id=s.id WHERE p.paper_id=#{paperId} and p.type='2';
+    </select>
+    <select id="listMultipleQuestion" resultType="com.jacket.webapp.teacher.entity.MultipleQuestion">
+        SELECT s.id,s.content,s.difficulty,s.A,s.B,s.C,s.D,s.E,s.F,s.score,s.answer,s.explains FROM t_paper_detail p
+        INNER JOIN t_multiple_question s on p.question_id=s.id WHERE p.paper_id=#{paperId} and p.type='3';
+    </select>
+    <select id="listCompleteQuestion" resultType="com.jacket.webapp.teacher.entity.CompleteQuestion">
+        SELECT s.id,s.content,s.difficulty,s.score,s.answer,s.explains FROM t_paper_detail p
+        INNER JOIN t_complete_question s on p.question_id=s.id WHERE p.paper_id=#{paperId} and p.type='4';
+    </select>
+
+    <select id="listShortAnswerQuestion" resultType="com.jacket.webapp.teacher.entity.ShortAnswerQuestion">
+        SELECT s.id,s.content,s.difficulty,s.score,s.answer,s.explains FROM t_paper_detail p
+        INNER JOIN t_shortanswer_question s on p.question_id=s.id WHERE p.paper_id=#{paperId} and p.type='5';
+    </select>
+
+
+
+</mapper>

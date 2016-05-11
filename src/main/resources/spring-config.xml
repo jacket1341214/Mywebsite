@@ -21,7 +21,9 @@
     http://www.springframework.org/schema/util/spring-util.xsd">
 
     <!-- 自动扫描quick4j包 ,将带有注解的类 纳入spring容器管理 -->
-    <context:component-scan base-package="com.jacket.webapp.*.service"></context:component-scan>
+    <context:component-scan base-package="com.jacket.webapp.*.service">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
 
     <!-- 引入配置文件 -->
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -66,15 +68,51 @@
         <property name="filters" value="stat"/>
     </bean>
 
+
     <!-- mybatis文件配置，扫描所有mapper文件 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" p:dataSource-ref="dataSource"
 
           p:mapperLocations="classpath:mybatis/*/*.xml">
         <property name="typeAliasesPackage" value="com.jacket.webapp.*.entity"/>
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageHelper">
+                    <property name="properties">
+                        <value>
+                            dialect=hsqldb
+                            reasonable=true
+                        </value>
+                    </property>
+                </bean>
+                <bean class="com.github.abel533.mapperhelper.MapperInterceptor">
+                    <property name="properties">
+                        <value>
+                            mappers=com.github.abel533.mapper.Mapper
+                            IDENTITY=MYSQL
+                            notEmpty=true
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
             </bean>
 
+
+    <bean id="entityMapper" class="com.github.abel533.entity.EntityMapper" scope="prototype">
+        <constructor-arg ref="commonMapper"/>
+    </bean>
+
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" scope="prototype">
+        <constructor-arg index="0" ref="sqlSessionFactory"/>
+    </bean>
+
+    <bean id="sqlMapper" class="com.github.abel533.sql.SqlMapper" scope="prototype">
+        <constructor-arg ref="sqlSession"/>
+    </bean>
+    <!--<bean class="com.github.abel533.mapper.Mapper"></bean>-->
+
     <!-- spring与mybatis整合配置，扫描所有dao -->
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" p:basePackage="com.jacket.webapp.*.repository"
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" p:basePackage="com.github.abel533.entity.mapper,com.jacket.webapp.*.repository"
           p:sqlSessionFactoryBeanName="sqlSessionFactory"/>
 
     <!-- 对dataSource 数据源进行事务管理 -->

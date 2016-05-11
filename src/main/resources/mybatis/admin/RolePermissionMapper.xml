@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jacket.webapp.user.repository.RolePermissionRepository" >
+    <select id="listPermissionByRoleId" resultType="com.jacket.webapp.user.entity.Permission">
+    SELECT p.id,p.name,p.code,p.description,p.status FROM t_role_per r LEFT JOIN t_permission p
+    ON r.per_id=p.id WHERE r.role_id=#{0};
+    </select>
+
+</mapper>

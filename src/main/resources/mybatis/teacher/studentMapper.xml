@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jacket.webapp.teacher.repository.StudentRepository" >
+    <select id="listStudentByCourseIdAndTeacherId" resultType="com.jacket.webapp.user.entity.User">
+      SELECT u.id,u.username,u.`name` FROM t_student_course sc LEFT JOIN t_course c on sc.course_id=c.id
+      LEFT JOIN t_user u ON sc.user_id=u.id WHERE c.id=#{0} AND c.user_id=#{1};
+    </select>
+
+
+
+</mapper>

@@ -59,9 +59,10 @@
       <plugin>
         <groupId>org.apache.tomcat.maven</groupId>
         <artifactId>tomcat7-maven-plugin</artifactId>
+        <version>2.1</version>
         <configuration>
           <port>8888</port>
-          <path>/quick4j</path>
+          <path>/MyWebsite</path>
           <!-- spring profile  -->
           <!--<systemProperties>-->
             <!--<systemProperty>-->
@@ -125,15 +126,15 @@
 
     <!-- lib versions -->
     <junit.version>4.11</junit.version>
-    <spring.version>4.0.2.RELEASE</spring.version>
-    <mybatis.version>3.2.2</mybatis.version>
+    <spring.version>4.1.6.RELEASE</spring.version>
+    <mybatis.version>3.2.8</mybatis.version>
     <mybatis.spring.version>1.2.2</mybatis.spring.version>
     <mysql.connector.version>5.1.30</mysql.connector.version>
     <postgresql.version>9.1-901.jdbc4</postgresql.version>
-    <slf4j.version>1.6.6</slf4j.version>
+    <slf4j.version>1.7.12</slf4j.version>
     <log4j.version>1.2.12</log4j.version>
     <httpclient.version>4.1.2</httpclient.version>
-    <jackson.version>1.9.13</jackson.version>
+    <jackson.version>2.5.3</jackson.version>
     <c3p0.version>0.9.1.2</c3p0.version>
     <druid.version>1.0.5</druid.version>
     <tomcat.jdbc.version>7.0.53</tomcat.jdbc.version>
@@ -148,6 +149,9 @@
     <aspectj.version>1.6.12</aspectj.version>
     <netty.version>4.0.18.Final</netty.version>
     <hibernate.validator.version>5.1.1.Final</hibernate.validator.version>
+    <mybatis-pagehelper.version>3.7.5</mybatis-pagehelper.version>
+    <mybatis-mapper.version>3.1.1</mybatis-mapper.version>
+    <mapper.entitymapper.version>1.0.0</mapper.entitymapper.version>
   </properties>
 
   <dependencies>
@@ -171,11 +175,11 @@
       <version>${spring.version}</version>
     </dependency>
 
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-oxm</artifactId>
-      <version>${spring.version}</version>
-    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>org.springframework</groupId>-->
+      <!--<artifactId>spring-oxm</artifactId>-->
+      <!--<version>${spring.version}</version>-->
+    <!--</dependency>-->
 
     <dependency>
       <groupId>org.springframework</groupId>
@@ -243,11 +247,27 @@
     </dependency>
 
     <!-- jackson -->
+    <!-- JSON -->
     <dependency>
-      <groupId>org.codehaus.jackson</groupId>
-      <artifactId>jackson-mapper-asl</artifactId>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
       <version>${jackson.version}</version>
     </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.module</groupId>
+      <artifactId>jackson-module-jaxb-annotations</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-joda</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>org.codehaus.jackson</groupId>-->
+      <!--<artifactId>jackson-mapper-asl</artifactId>-->
+      <!--<version>${jackson.version}</version>-->
+    <!--</dependency>-->
 
     <!-- log start -->
     <dependency>
@@ -421,6 +441,23 @@
       <artifactId>sitemesh</artifactId>
       <version>${sitemesh3.version}</version>
       <scope>runtime</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>tk.mybatis</groupId>
+      <artifactId>mapper</artifactId>
+      <version>3.1.1</version>
+    </dependency>
+    <!-- mybatis 通用分页 -->
+    <dependency>
+      <groupId>com.github.pagehelper</groupId>
+      <artifactId>pagehelper</artifactId>
+      <version>${mybatis-pagehelper.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.github.abel533</groupId>
+      <artifactId>entitymapper</artifactId>
+      <version>${mapper.entitymapper.version}</version>
     </dependency>
 
   </dependencies>
